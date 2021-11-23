@@ -38,6 +38,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  background-image: url("assets/images/background.jpg");
 }
 #wrapper {
   width: 100%;
@@ -46,7 +47,6 @@ export default {
   display: grid;
   grid-template-rows: 100px 500px repeat(3, minmax(auto, auto));
   grid-template-columns: 1fr 3fr 1fr;
-  background-image: url("assets/images/background.jpg");
   padding: 20px 50px 50px 50px;
 }
 #nav {
@@ -96,6 +96,33 @@ export default {
 .description {
   font-weight: 200;
   text-align: justify;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+  opacity: 0.5;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
+@media screen and (min-width: 1200px){
+  #wrapper {
+    width: 1200px;
+  }
 }
 
 @media only screen and (max-width: 768px){

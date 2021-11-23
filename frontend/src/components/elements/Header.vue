@@ -65,7 +65,6 @@ export default {};
   justify-content: flex-end;
 }
 
-
 @media screen and (max-width: 320px) {
   #header {
     height: auto;
