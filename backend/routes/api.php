@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Api\WebsiteInfoController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -17,3 +17,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+// Route get infomation website
+Route::resource('website_infomation', 'App\Http\Controllers\Api\WebsiteInfoController')->only("index");
+
+// Route get infomation
+Route::resource('infomation', 'App\Http\Controllers\Api\InfoController')->only("index");

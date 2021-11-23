@@ -7,7 +7,7 @@
           type="carousel"
           v-bind:autoplay="2000"
           v-bind:hoverpause="true"
-          v-bind:perView="5"
+          v-bind:perView="4"
           v-bind:gap="50"
           v-bind:breakpoints = {1200:{perView:4},800:{perView:2},500:{perView:1}}
         >

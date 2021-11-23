@@ -1,22 +1,40 @@
 <template>
   <div id="shortInfo">
     <div id="avatar">
-      <img v-bind:src="image" alt="" />
+      <img v-bind:src="image" v-bind:alt="website_name" />
     </div>
     <div id="description">
-      <h2 id="title-header">TRAN PHUONG NAM</h2>
+      <h2 id="title-header">{{website_name}}</h2>
       <h4>PHP Developer & Trainer</h4>
     </div>
   </div>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   data() {
     return {
       image: require("../../assets/images/avata.jpg"),
+      website_name: "",
+      short_desc: ""
     };
   },
+
+  // Hàm created() Khi trang load xong thì gọi tới server để lấy dữ liệu về
+  created(){
+    axios.get("http://127.0.0.1:8000/api/website_infomation")
+    .then(response => {
+      // this.image = response.data[0].avatar
+      this.website_name = response.data[0].website_name
+      this.short_desc = response.data[0].short_desc
+    })
+    .catch(error => {
+      console.log(error)
+      this.errored = true
+    })
+  }
 };
 </script>
 

@@ -35,6 +35,7 @@
 <script>
 import { Glide, GlideSlide } from "vue-glide-js";
 import "vue-glide-js/dist/vue-glide.css";
+import axios from "axios";
 
 export default {
   components: {
@@ -50,28 +51,22 @@ export default {
   },
   data() {
     return {
-      infomations: [
-        {
-          id: 1,
-          name: "Abouts",
-          content:
-            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laboriosam quis dignissimos harum voluptas, dolor velit perferendis maxime quam possimus provident nisi distinctio modi commodi dolores aperiam dicta ea? A, dicta! &curren; Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laboriosam quis dignissimos harum voluptas, dolor velit perferendis maxime quam possimus provident nisi distinctio modi commodi dolores aperiam dicta ea? A, dicta!",
-        },
-        {
-          id: 2,
-          name: "Experiences",
-          content:
-            "Công ty CP Khiết Long <br> 01/2020 - 01/2021 <br> PHP DEVELOPER &curren; Công ty TNHH Rikai Technology <br> 07/2021 - Hiện tại <br> PHP DEVELOPER/ Trainer",
-        },
-        {
-          id: 3,
-          name: "Educations",
-          content:
-            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laboriosam quis dignissimos harum voluptas, dolor velit perferendis maxime quam possimus provident nisi distinctio modi commodi dolores aperiam dicta ea? A, dicta!",
-        },
-      ],
+      infomations: [{}],
     };
   },
+
+  /*Sử dụng axios để lấy dữ liệu khi component được tạo thành công*/
+  created() {
+    axios.get(`http://127.0.0.1:8000/api/infomation`)
+    .then(response => {
+      this.infomations = response.data
+    })
+    .catch(e => {
+      console.log(e)
+    })
+  },
+  /*Sử dụng axios để lấy dữ liệu khi component được tạo thành công*/
+
   methods: {
     cutParagraph: function (infoContent) {
       let arrayText = infoContent.split("&curren;");
@@ -79,12 +74,12 @@ export default {
       if (arrayText.length > 1) {
         for (let i = 0; i < arrayText.length; i++) {
           content +=
-            "<section class='info_text_content' style='width: 100%; background-color: #fff; padding: 20px'>" +
-            arrayText[i] +
-            "</section>";
+            "<section class='info_text_content' style='width: 100%; height:200px; background-color: #fff; padding: 20px'>" +
+            arrayText[i] + "</section>";
         }
       } else {
-        content = infoContent;
+        content = "<section class='info_text_content' style='width: 100%; height:200px; background-color: #fff; padding: 20px'>" +
+            infoContent + "</section>";
       }
       return content;
     },
