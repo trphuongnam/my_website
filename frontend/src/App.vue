@@ -6,16 +6,19 @@
       <Slide></Slide>
       <Skill></Skill>
       <Contact></Contact>
+      <Map></Map>
       <Footer></Footer>
     </div>
   </div>
 </template>
+
 <script>
 import Header from "@/components/elements/Header.vue";
 import Info from "@/components/elements/Info.vue";
 import Slide from "@/components/elements/Slide.vue";
 import Skill from "@/components/elements/Skill.vue";
 import Contact from "@/components/elements/Contact.vue";
+import Map from "@/components/elements/Map.vue";
 import Footer from "@/components/elements/Footer.vue";
 
 export default {
@@ -25,6 +28,7 @@ export default {
     Slide,
     Skill,
     Footer,
+    Map,
     Contact
   },
 };
@@ -38,16 +42,24 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  background-image: url("assets/images/background.jpg");
+  background-color: #fff;
+  background-position: center;
+  height: 100%;
+  min-height: 100vh;
+  background-size: 100%;
 }
 #wrapper {
   width: 100%;
   height: auto;
   margin: 0 auto;
   display: grid;
-  grid-template-rows: 100px 500px repeat(3, minmax(auto, auto));
+  grid-template-rows: 100px 500px repeat(4, minmax(auto, auto));
   grid-template-columns: 1fr 3fr 1fr;
-  padding: 20px 50px 50px 50px;
+  /*padding: 20px 50px 50px 50px;*/
+  box-shadow: #ccc 0px 10px 16px 16px;
+  background-image: url("https://images.unsplash.com/photo-1563191911-e65f8655ebf9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80");
+  background-repeat: no-repeat;
+  background-size: 100%;
 }
 #nav {
   padding: 30px;
@@ -70,6 +82,7 @@ export default {
   text-align: left;
   position: relative;
   padding-top: 0.5em;
+  margin-bottom: 10px;
 }
 
 .title-element h3{

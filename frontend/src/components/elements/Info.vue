@@ -5,7 +5,7 @@
     </div>
     <div id="description">
       <h2 id="title-header">{{website_name}}</h2>
-      <h4>PHP Developer & Trainer</h4>
+      <h4>{{short_desc}}</h4>
     </div>
   </div>
 </template>
@@ -24,7 +24,7 @@ export default {
 
   // Hàm created() Khi trang load xong thì gọi tới server để lấy dữ liệu về
   created(){
-    axios.get("http://127.0.0.1:8000/api/website_infomation")
+    axios.get(process.env.VUE_APP_SERVER_URL + "website_infomation")
     .then(response => {
       // this.image = response.data[0].avatar
       this.website_name = response.data[0].website_name

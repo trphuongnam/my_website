@@ -15,7 +15,8 @@ class InfoController extends Controller
      */
     public function index()
     {
-        return Infomation::get();
+        $infomation = Infomation::get();
+        return response()->json($infomation);
     }
 
     /**

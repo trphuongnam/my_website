@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Contact;
 
 class ContactController extends Controller
 {
@@ -35,7 +36,20 @@ class ContactController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // return $request;
+        $contact = new Contact();
+        $contact->fullname = $this->replaceSpecialCharacters($request->fullname);
+        $contact->phone = $request->phone;
+        $contact->email = $request->email;
+        $contact->content = $this->replaceSpecialCharacters($request->content);
+        $saveContact = $contact->save();
+
+        if($saveContact) {
+            $message = ["msg" => "Thank you for your contact. I will respond back soon. !!", "status" => true];
+            return $message;
+        }else {
+            $message = ["msg" => "Oh! Sorry. Your contact could not be sent. Please try again!!!", "status" => false];
+        }
     }
 
     /**
@@ -81,5 +95,11 @@ class ContactController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    private function replaceSpecialCharacters($string){
+        $arraySpecialCharaters = ['<', '>', '&', '"', '\''];
+        $replace   = ['&lt;', '&gt;', '	&amp;', '&quot;', '&#039;'];
+        return str_replace($arraySpecialCharaters, $replace, $string);
     }
 }
