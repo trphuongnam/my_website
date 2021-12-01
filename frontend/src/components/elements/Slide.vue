@@ -21,5 +21,6 @@ export default {
     border: 0px solid yellow;
     grid-column: 1/4;
     grid-row: 3/4;
+    background-color: #fff;
   }
 </style>

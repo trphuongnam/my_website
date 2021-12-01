@@ -87,7 +87,6 @@ export default {
 
 .skill_elements {
   width: 100%;
-  height: 500px;
   border: 0px solid red;
   display: grid;
   grid-template-columns: 1fr 3fr 1fr;
@@ -109,7 +108,7 @@ export default {
   overflow: hidden;
   display: inline-block;
   height: 200px;
-  background: #fff;
+  background: #e9e4e4db;
   display: flex;
   flex-direction: column;
   align-items: center;

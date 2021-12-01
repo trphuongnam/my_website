@@ -17,7 +17,7 @@
     </section>
     <section id="contact_form">
       <div class="title-element title_right"><h3>CONTACT ME</h3></div>
-      <form action="#" class="ct_form">
+      <form class="ct_form" @submit.prevent="sendContact">
         <div class="input_form">
           <input
             type="text"
@@ -27,6 +27,7 @@
             placeholder="Full Name"
             tabindex="1"
             required
+            v-model="dataContacts.fullname"
           />
           <input
             type="tel"
@@ -36,16 +37,22 @@
             placeholder="Telephone"
             tabindex="2"
             required
+            v-model="dataContacts.phone"
           />
+          <span style="border: 1px solid red; color: red" v-if="errors.errPhone == true">So dt khong dung</span>
+
           <input
-            type="text"
+            type="email"
             name="email"
             id="email"
             class="text_input"
             placeholder="Email"
             tabindex="3"
             required
+            v-model="dataContacts.email"
           />
+          <span style="border: 1px solid red; color: red" v-if="errors.errEmail == true">Email khong dung</span>
+
           <textarea
             name="content"
             id="content"
@@ -55,8 +62,12 @@
             placeholder="Write your message here ..."
             tabindex="4"
             required
+            v-model="dataContacts.content"
           ></textarea>
-          <button class="btn-primary button_send">SEND</button>
+          <button class='btn-primary button_send' v-bind:disabled="elements.btnDisabled">SEND</button>
+          <div v-bind:class="messages.bgColor" role="alert" v-if="messages.sendSuccess !== null">
+            {{messages.content}}
+          </div>
         </div>
       </form>
     </section>
@@ -64,7 +75,78 @@
 </template>
 
 <script>
-export default {};
+import axios from "axios";
+
+export default {
+  data() {
+    return {
+      dataContacts:{
+        fullname: "",
+        phone: "",
+        email: "",
+        content: "",
+      },
+      messages:{
+        content: null,
+        bgColor: "",
+      },
+      errors:{
+        errFullname: false,
+        errPhone: false,
+        errEmail: false,
+        errContent: false
+      },
+      elements:{
+        btnDisabled: false
+      }
+    }
+  },
+  methods:{
+    
+    /*Begin: Function send contact from user to server*/
+    sendContact: function(){
+      /*Disable button submit*/
+      this.elements.btnDisabled = true;
+
+      /*Call axios to send data from client to server*/
+      axios.post(process.env.VUE_APP_SERVER_URL + 'contact', {
+                  fullname: this.dataContacts.fullname,
+                  phone: this.dataContacts.phone,
+                  email: this.dataContacts.email,
+                  content: this.dataContacts.content
+                })
+                .then( 
+
+                  /*Call function showMessage to return message*/
+                  (response) => this.showMessage(response)
+                )
+                .catch((error) => this.showError(error));
+    },
+    /*End: Function send contact from user to server*/
+
+    /*Begin: Function show message when send contact success*/
+    showMessage: function(results){
+      if(results.data.status === true){
+        this.dataContacts.fullname = "";
+        this.dataContacts.phone = "";
+        this.dataContacts.email = "";
+        this.dataContacts.content = "";
+      }
+      this.messages.content = results.data.msg;
+      this.messages.bgColor = "alert alert-primary";
+    },
+    /*End: Function show message when send contact success*/
+
+    /*Begin: Function show error when send contact not success*/
+    showError: function(err){
+      if(err.data.status === false){
+        this.messages.content = err.data.err;
+        this.messages.bgColor = "alert alert-danger";
+      }
+    }
+    /*End: Function show error when send contact not success*/
+  }
+};
 </script>
 
 <style scoped>

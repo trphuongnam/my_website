@@ -8,12 +8,14 @@
       v-bind:perView="1"
       v-bind:animationDuration="5000"
       v-bind:gap="0"
+      v-if="infomations !== null"
     >
       <vue-glide-slide v-for="infomation in infomations" :key="infomation.id">
-        <h4 class="info_title">{{ infomation.name }}</h4>
+        <h4 class="info_title" >{{ infomation.name }}</h4>
+
         <div
           class="infomation_content"
-          v-html="cutParagraph(infomation.content)"
+          v-html="showContent(infomation.content)"
         ></div>
       </vue-glide-slide>
       <template slot="control">
@@ -51,13 +53,13 @@ export default {
   },
   data() {
     return {
-      infomations: [{}],
+      infomations: null,
     };
   },
 
   /*Sử dụng axios để lấy dữ liệu khi component được tạo thành công*/
   created() {
-    axios.get(`http://127.0.0.1:8000/api/infomation`)
+    axios.get(process.env.VUE_APP_SERVER_URL + 'infomation')
     .then(response => {
       this.infomations = response.data
     })
@@ -68,17 +70,16 @@ export default {
   /*Sử dụng axios để lấy dữ liệu khi component được tạo thành công*/
 
   methods: {
-    cutParagraph: function (infoContent) {
+    showContent: function (infoContent) {
       let arrayText = infoContent.split("&curren;");
       let content = "";
       if (arrayText.length > 1) {
         for (let i = 0; i < arrayText.length; i++) {
-          content +=
-            "<section class='info_text_content' style='width: 100%; height:200px; background-color: #fff; padding: 20px'>" +
+          content += "<section class='info_text_content' style='width: 100%; height:200px; padding: 20px; display: flex; justify-content: center; align-items: center'>" +
             arrayText[i] + "</section>";
         }
       } else {
-        content = "<section class='info_text_content' style='width: 100%; height:200px; background-color: #fff; padding: 20px'>" +
+        content = "<section class='info_text_content' style='width: 100%; height:200px; padding: 20px; display: flex; justify-content: center; align-items: center'>" +
             infoContent + "</section>";
       }
       return content;
@@ -126,6 +127,17 @@ export default {
   align-items: center;
   text-align: justify;
   justify-content: space-around;
+}
+
+#control_slide_bar{
+  position: absolute;
+  /* border: 1px solid; */
+  z-index: 2;
+  top: 50%;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-content: center;
 }
 
 .btn_control_slide {

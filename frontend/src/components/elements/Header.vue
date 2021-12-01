@@ -5,6 +5,12 @@
         <li class="menuItem">
           <router-link to="/" tag="a" class="menuLink">Home</router-link>
         </li>
+        <li class="menuItem">
+          <router-link to="/" tag="a" class="menuLink">My Blogs</router-link>
+        </li>
+        <li class="menuItem">
+          <a href="#contact_item" class="menuLink">Contact</a>
+        </li>
       </ul>
       <div id="btn_downloadCV">
         <button type="button" class="btn btn-success">DOWNLOAD MY FULL CV</button>
@@ -25,6 +31,7 @@ export default {};
   padding-bottom: 20px;
   grid-column: 1/4;
   grid-row: 1/2;
+  padding: 0px 20px;
 }
 
 #topmenu {
@@ -58,8 +65,31 @@ export default {};
 }
 .menuItem .menuLink {
   text-decoration: none;
-  color: #000;
+  color: #fff;
 }
+
+.menuItem .menuLink:hover {
+  text-decoration: none;
+  color: coral;
+  position: relative;
+}
+
+/*.menuItem .menuLink::after {
+  transition: width 10s;
+}
+*/
+.menuItem .menuLink:hover::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 2rem;
+  border-bottom: 2px solid red;
+  width: 100%;
+  -webkit-transition: all 3s;
+    transition: all 3s;
+}
+
 
 #btn_downloadCV{
   justify-content: flex-end;

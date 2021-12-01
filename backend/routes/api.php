@@ -3,6 +3,9 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\WebsiteInfoController;
+use App\Http\Controllers\Api\InfoController;
+use App\Http\Controllers\Api\ContactController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -19,7 +22,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 // Route get infomation website
-Route::resource('website_infomation', 'App\Http\Controllers\Api\WebsiteInfoController')->only("index");
+Route::resource('website_infomation', WebsiteInfoController::class)->only("index");
 
 // Route get infomation
-Route::resource('infomation', 'App\Http\Controllers\Api\InfoController')->only("index");
+Route::resource('infomation', InfoController::class)->only("index");
+
+// Route for contact page
+Route::resource('contact', ContactController::class)->only("store");
