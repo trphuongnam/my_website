@@ -15,7 +15,9 @@
 #map{
   grid-row: 6/7;
   grid-column: 1/4;
-  margin-top: 10px;
+  padding-top: 10px;
+  background-color: #fff;
+  z-index: 0;
 }
 
 #map_element{

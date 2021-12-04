@@ -83,6 +83,8 @@ export default {
   border: 0px solid rebeccapurple;
   grid-column: 1/4;
   grid-row: 4/5;
+  background-color: #fff;
+  z-index: 0;
 }
 
 .skill_elements {

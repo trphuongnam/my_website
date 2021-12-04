@@ -22,5 +22,6 @@ export default {
     grid-column: 1/4;
     grid-row: 3/4;
     background-color: #fff;
+    z-index: 0;
   }
 </style>

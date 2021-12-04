@@ -155,6 +155,7 @@ export default {
   grid-column: 1/4;
   border: 0px solid #fff;
   display: flex;
+  z-index: 0;
 }
 
 #contact_item {
@@ -280,10 +281,31 @@ export default {
 
   #contact_item{
     width: 100%;
+    height: auto;
   }
 
   #contact_form{
     width: 100%
+  }
+
+  .info_contact{
+    height: auto;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  #contact_item{
+    width: 100%;
+    height: auto;
+  }
+
+  .info_contact{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .content_info{
+    word-wrap: break-word;
   }
 }
 </style>

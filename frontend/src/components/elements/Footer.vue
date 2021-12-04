@@ -13,6 +13,7 @@
 </template>
 
 <script>
+
 export default {
   
 }
@@ -23,7 +24,9 @@ export default {
 #footer{
   grid-row: 7/8;
   grid-column: 1/4;
-  margin-top: 10px;
+  padding-top: 10px;
+  background-color: #fff;
+  z-index: 0;
 }
 h3 {
   margin: 40px 0 0;
