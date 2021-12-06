@@ -29,20 +29,21 @@ export default {
     Skill,
     Footer,
     Map,
-    Contact
+    Contact,
   },
 };
 </script>
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Heebo:wght@100;200;500&display=swap");
 @import url("assets/css/reset.css");
+
 #app {
   font-family: Heebo, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  background-color: #fff;
+  background-image: radial-gradient(circle, #0058ff, #007cff, #0098ff, #00b0ff, #14c5f6);
   background-position: center;
   height: 100%;
   min-height: 100vh;
@@ -53,13 +54,10 @@ export default {
   height: auto;
   margin: 0 auto;
   display: grid;
-  grid-template-rows: 100px 500px repeat(4, minmax(auto, auto));
+  grid-template-rows: auto 500px repeat(4, minmax(auto, auto));
   grid-template-columns: 1fr 3fr 1fr;
   /*padding: 20px 50px 50px 50px;*/
-  box-shadow: #ccc 0px 10px 16px 16px;
-  background-image: url("https://images.unsplash.com/photo-1563191911-e65f8655ebf9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80");
-  background-repeat: no-repeat;
-  background-size: 100%;
+  box-shadow: #106ebf 0px 10px 7px 7px;
 }
 #nav {
   padding: 30px;
@@ -148,5 +146,12 @@ export default {
   .title-element {
     margin-bottom: 20px;
   }
+}
+
+
+@media screen and (max-width: 230px){
+  .title-element h3{
+    font-size: 12vw;
+  }  
 }
 </style>

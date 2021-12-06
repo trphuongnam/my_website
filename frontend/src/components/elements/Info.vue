@@ -27,8 +27,14 @@ export default {
     axios.get(process.env.VUE_APP_SERVER_URL + "website_infomation")
     .then(response => {
       // this.image = response.data[0].avatar
-      this.website_name = response.data[0].website_name
-      this.short_desc = response.data[0].short_desc
+      var websiteName, shortDesc;
+      sessionStorage.setItem("website_name", response.data[0].website_name);
+      sessionStorage.setItem("short_desc", response.data[0].short_desc);
+
+      websiteName = sessionStorage.getItem("website_name");
+      shortDesc = sessionStorage.getItem("short_desc");
+      this.website_name = websiteName;
+      this.short_desc = shortDesc;
     })
     .catch(error => {
       console.log(error)
@@ -49,6 +55,10 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background-image: url("../../assets/images/bgr2.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: 0;
 }
 #description {
   width: 80%;
@@ -75,7 +85,13 @@ export default {
   font-size: 44px;
   font-family: Heebo;
   line-height: 1.5;
+  color: #fff;
 }
+
+#description > h4{
+  color: aliceblue;
+}
+
 .text {
   font-size: 16px;
   margin: 35px 0px;
@@ -102,5 +118,11 @@ export default {
   #title-header{
     font-size: 1.5rem;
   }
+
+  #avatar{
+    width: 80vw;
+    height: 80vw;
+  }
 }
+
 </style>

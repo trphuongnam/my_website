@@ -1,5 +1,6 @@
 <template>
   <header id="header">
+    <MobileMenu></MobileMenu>
     <nav id="topmenu">
       <ul id="menu">
         <li class="menuItem">
@@ -16,11 +17,23 @@
         <button type="button" class="btn btn-success">DOWNLOAD MY FULL CV</button>
       </div>
     </nav>
+    
   </header>
 </template>
 
 <script>
-export default {};
+import MobileMenu from "@/components/elements/Menu/MobileMenu";
+
+export default {
+  components:{
+    MobileMenu
+  },
+  data() {
+    return{
+      
+    }
+  }
+};
 </script>
 
 <style scoped>
@@ -32,6 +45,8 @@ export default {};
   grid-column: 1/4;
   grid-row: 1/2;
   padding: 0px 20px;
+  background-color: #fff;
+  z-index: 1;
 }
 
 #topmenu {
@@ -65,7 +80,7 @@ export default {};
 }
 .menuItem .menuLink {
   text-decoration: none;
-  color: #fff;
+  color: #000;
 }
 
 .menuItem .menuLink:hover {
@@ -95,13 +110,33 @@ export default {};
   justify-content: flex-end;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 560px) {
   #header {
-    height: auto;
+    height: 50px;
+    position: relative;
   }
 
   #topmenu{
     flex-direction: column;
+    overflow: hidden;
+    z-index: 100;
+    position: absolute;
+    left: 0;
+    background-color: aliceblue;
+    display: none;
+  }
+
+  #menu {
+    flex-direction: column;
+    border: 0px solid red;
+    align-items: flex-start;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  #topmenu{
+    flex-direction: column;
+    font-size: 1em;
   }
 }
 </style>
