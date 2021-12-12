@@ -54,7 +54,7 @@ export default {
   height: auto;
   margin: 0 auto;
   display: grid;
-  grid-template-rows: auto 500px repeat(4, minmax(auto, auto));
+  grid-template-rows: auto 500px repeat(5, minmax(auto, auto));
   grid-template-columns: 1fr 3fr 1fr;
   /*padding: 20px 50px 50px 50px;*/
   box-shadow: #106ebf 0px 10px 7px 7px;
@@ -107,6 +107,10 @@ export default {
 .description {
   font-weight: 200;
   text-align: justify;
+}
+
+.paragraph{
+  margin: 0;
 }
 
 /* width */

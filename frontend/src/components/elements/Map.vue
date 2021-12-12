@@ -13,7 +13,7 @@
 
 <style scoped>
 #map{
-  grid-row: 6/7;
+  grid-row: 7/8;
   grid-column: 1/4;
   padding-top: 10px;
   background-color: #fff;

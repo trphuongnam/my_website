@@ -22,7 +22,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 #footer{
-  grid-row: 7/8;
+  grid-row: 8/9;
   grid-column: 1/4;
   padding-top: 10px;
   background-color: #fff;
