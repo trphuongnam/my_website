@@ -39,7 +39,7 @@ export default {
 <style scoped>
 #header {
   width: 100%;
-  height: 100px;
+  height: 50px;
   box-sizing: border-box;
   padding-bottom: 20px;
   grid-column: 1/4;
@@ -51,7 +51,7 @@ export default {
 
 #topmenu {
   width: 100%;
-  height: 100px;
+  height: 50px;
   font-size: 20px;
   line-height: 43px;
   text-align: right;
@@ -112,7 +112,7 @@ export default {
 
 @media screen and (max-width: 560px) {
   #header {
-    height: 50px;
+    height: 0;
     position: relative;
   }
 
