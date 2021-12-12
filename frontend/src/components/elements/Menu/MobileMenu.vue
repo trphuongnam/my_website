@@ -45,28 +45,32 @@
 <style scoped>
 	/*Begin: CSS transition for wrapper of menu mobile*/
 	.top_menu-enter{
-		max-height: 0px;
+		opacity: 0;
+		height: 0px;
 	}
 	.top_menu-enter-active{
-		-webkit-transition: max-height 1s;
-		-moz-transition: max-height 1s;
-		-o-transition: max-height 1s;
-		transition: max-height 1s;
+		-webkit-transition: opacity 2.5s, height 1s;
+		-moz-transition: opacity 2.5s, height 1s;
+		-o-transition: opacity 2.5s, height 1s;
+		transition: opacity 2.5s, height 1s;
 	}
 	.top_menu-enter-to{
-		max-height: 300px;
+		opacity: 1;
+		height: 200px;
 	}
 	.top_menu-leave{
-		max-height: 300px;
+		opacity: 1;
+		height: 200px;
 	}
 	.top_menu-leave-active{
-		-webkit-transition: max-height 1s;
-		-moz-transition: max-height 1s;
-		-o-transition: max-height 1s;
-		transition: max-height 1s;
+		-webkit-transition: opacity 0.1s, height 1s;
+		-moz-transition: opacity 0.1s, height 1s;
+		-o-transition: opacity 0.1s, height 1s;
+		transition: opacity 0.1s, height 1s;
 	}
 	.top_menu-leave-to{
-		max-height: 0px;
+		opacity: 0;
+		height: 0px;
 	}
 	/*Begin: CSS transition for wrapper of menu mobile*/
 

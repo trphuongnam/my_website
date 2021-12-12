@@ -1,6 +1,7 @@
 <template>
   <div class="slide_elements">
     <div class="title-element"><h3>INFORMATION</h3></div>
+
     <vue-glide
       type="carousel"
       v-bind:autoplay="2000"
@@ -12,11 +13,7 @@
     >
       <vue-glide-slide v-for="infomation in infomations" :key="infomation.id">
         <h4 class="info_title" >{{ infomation.name }}</h4>
-
-        <div
-          class="infomation_content"
-          v-html="showContent(infomation.content)"
-        ></div>
+        <InfoContent :content="infomation.content"></InfoContent>
       </vue-glide-slide>
       <template slot="control">
         <button class="btn_control_slide" data-glide-dir="<">
@@ -35,6 +32,7 @@
 </template>
 
 <script>
+import SectionSlider from "@/components/elements/Slide/SectionSlider.vue";
 import { Glide, GlideSlide } from "vue-glide-js";
 import "vue-glide-js/dist/vue-glide.css";
 import axios from "axios";
@@ -43,6 +41,7 @@ export default {
   components: {
     [Glide.name]: Glide,
     [GlideSlide.name]: GlideSlide,
+    'InfoContent': SectionSlider
   },
   props: {
     autoplay: Number,
@@ -62,29 +61,13 @@ export default {
     axios.get(process.env.VUE_APP_SERVER_URL + 'infomation')
     .then(response => {
       this.infomations = response.data
+      console.log( response.data);
     })
     .catch(e => {
       console.log(e)
     })
   },
   /*Sử dụng axios để lấy dữ liệu khi component được tạo thành công*/
-
-  methods: {
-    showContent: function (infoContent) {
-      let arrayText = infoContent.split("&curren;");
-      let content = "";
-      if (arrayText.length > 1) {
-        for (let i = 0; i < arrayText.length; i++) {
-          content += "<section class='info_text_content' style='width: 100%; height:200px; padding: 20px; display: flex; justify-content: center; align-items: center'>" +
-            arrayText[i] + "</section>";
-        }
-      } else {
-        content = "<section class='info_text_content' style='width: 100%; height:200px; padding: 20px; display: flex; justify-content: center; align-items: center'>" +
-            infoContent + "</section>";
-      }
-      return content;
-    },
-  },
 };
 </script>
 
@@ -119,14 +102,6 @@ export default {
 .glide__slide {
   overflow: auto;
   height: 300px;
-}
-
-.infomation_content {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  text-align: justify;
-  justify-content: space-around;
 }
 
 #control_slide_bar{

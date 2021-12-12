@@ -151,7 +151,7 @@ export default {
 
 <style scoped>
 #contact {
-  grid-row: 5/6;
+  grid-row: 6/7;
   grid-column: 1/4;
   border: 0px solid #fff;
   display: flex;
