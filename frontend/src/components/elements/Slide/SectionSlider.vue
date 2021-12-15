@@ -40,8 +40,6 @@
 				for (var i = 0; i < arrayText.length; i++) {
 					this.arrTextContent[i] = ({text: arrayText[i]});
 				}
-				console.log("arrTextContent");
-				console.log(this.arrTextContent);
 			}
 		},
 	}
@@ -54,7 +52,8 @@
 	padding: 20px; 
 	display: flex; 
 	justify-content: center; 
-	align-items: center
+	align-items: center;
+	line-height: 2rem;
 }
 
 .infomation_content {
@@ -63,6 +62,7 @@
   align-items: center;
   text-align: justify;
   justify-content: space-around;
+	line-height: 1.5rem;
 }
 
 @media only screen and (max-width: 650px) {

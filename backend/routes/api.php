@@ -22,7 +22,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 // Route get infomation website
-Route::resource('website_infomation', WebsiteInfoController::class)->only("index");
+Route::resource('website_infomation', WebsiteInfoController::class)->only(['index', 'edit', 'update']);
+Route::get('download/mycv', [WebsiteInfoController::class, 'downloadMyCV'])->name("download.mycv");
 
 // Route get infomation
 Route::resource('infomation', InfoController::class)->only("index");

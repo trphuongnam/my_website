@@ -121,6 +121,7 @@ export default {
 }
 
 .info_title {
+  font-size: 1.5rem;
   text-transform: uppercase;
 }
 
