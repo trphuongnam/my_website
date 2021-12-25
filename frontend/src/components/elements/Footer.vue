@@ -1,7 +1,7 @@
 <template>
   <div id="footer">
     <div id="btn_downloadCV">
-      <button type="button" class="btn btn-success">DOWNLOAD MY FULL CV</button>
+      <a :href="myCV" class="btn btn-success" target='_blank'>DOWNLOAD MY FULL CV</a>
     </div>
     <ul id="menu">
       <li class="menuItem">
@@ -13,9 +13,25 @@
 </template>
 
 <script>
+import axios from 'axios'
 
 export default {
-  
+  data() {
+    return{
+      myCV: null,
+    }
+  },
+  created() {
+    axios
+      .get(process.env.VUE_APP_SERVER_URL + 'download/mycv')
+      .then((response) => {
+        console.log(response)
+        this.myCV = process.env.VUE_APP_CV_URL + response.data
+      })
+      .catch((e) => {
+        console.log(e)
+      })
+  },
 }
 </script>
 

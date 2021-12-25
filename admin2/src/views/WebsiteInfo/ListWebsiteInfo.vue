@@ -23,15 +23,23 @@
       </CTableRow>
     </CTableHead>
     <CTableBody>
-      <CTableRow>
-        <CTableHeaderCell scope="row">1</CTableHeaderCell>
-        <CTableDataCell>Trần Phương Nam</CTableDataCell>
-        <CTableDataCell>PHP Developer & Trainner</CTableDataCell>
-        <CTableDataCell>@mdo</CTableDataCell>
+      <CTableRow v-for="information in informations" :key="information.id">
+        <CTableHeaderCell scope="row">{{ information.id }}</CTableHeaderCell>
+        <CTableDataCell>{{ information.website_name }}</CTableDataCell>
+        <CTableDataCell>{{ information.short_desc }}</CTableDataCell>
+        <CTableDataCell>
+          <CImage
+            rounded
+            thumbnail
+            :src="urlFile + information.avatar"
+            width="200"
+            height="200"
+          />
+        </CTableDataCell>
         <CTableDataCell>
           <router-link
             class="btn btn-warning rounded-pill"
-            :to="{ name: 'EditWebsite', params: { idInfo: 1 } }"
+            :to="{ name: 'EditWebsite', params: { idInfo: information.id } }"
           >
             <CIcon :icon="cilPen" size="xs" /> Edit
           </router-link>
@@ -43,6 +51,7 @@
 </template>
 <script>
 import { cilPlus, cilPen } from '@coreui/icons'
+import axios from 'axios'
 
 export default {
   name: 'ListWebsiteInforView',
@@ -52,6 +61,23 @@ export default {
       cilPen,
     }
   },
+  data() {
+    return {
+      informations: null,
+      urlFile: process.env.VUE_APP_IMAGE_URL,
+    }
+  },
+  created() {
+    axios
+      .get(process.env.VUE_APP_SERVER_URL + 'website_infomation')
+      .then((response) => {
+        this.informations = response.data
+      })
+      .catch((e) => {
+        console.log(e)
+      })
+  },
+  methods: {},
 }
 </script>
 <style scoped></style>

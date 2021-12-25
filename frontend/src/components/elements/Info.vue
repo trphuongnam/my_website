@@ -16,7 +16,7 @@ import axios from "axios";
 export default {
   data() {
     return {
-      image: require("../../assets/images/avata.jpg"),
+      image: null,
       website_name: "",
       short_desc: ""
     };
@@ -26,15 +26,9 @@ export default {
   created(){
     axios.get(process.env.VUE_APP_SERVER_URL + "website_infomation")
     .then(response => {
-      // this.image = response.data[0].avatar
-      var websiteName, shortDesc;
-      sessionStorage.setItem("website_name", response.data[0].website_name);
-      sessionStorage.setItem("short_desc", response.data[0].short_desc);
-
-      websiteName = sessionStorage.getItem("website_name");
-      shortDesc = sessionStorage.getItem("short_desc");
-      this.website_name = websiteName;
-      this.short_desc = shortDesc;
+      this.image = process.env.VUE_APP_IMAGE_URL + response.data[0].avatar
+      this.website_name = response.data[0].website_name
+      this.short_desc = response.data[0].short_desc
     })
     .catch(error => {
       console.log(error)

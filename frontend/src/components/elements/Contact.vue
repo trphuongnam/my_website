@@ -168,7 +168,8 @@ export default {
 
 .info_contact {
   color: #fff;
-  height: 50px;
+  height: auto;
+  line-height: 2rem;
 }
 
 .name_info{

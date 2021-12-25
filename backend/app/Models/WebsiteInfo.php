@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class WebsiteInfo extends Model
 {
     use HasFactory;
+		protected $fillable = ['website_name', 'short_desc', 'avatar', 'file_url'];
 }
