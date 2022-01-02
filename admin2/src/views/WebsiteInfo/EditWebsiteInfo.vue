@@ -108,9 +108,11 @@
 <script>
 import { cilArrowCircleLeft, cilSave } from '@coreui/icons'
 import axios from 'axios'
+import { urlConfigMixin } from '@/mixin/urlConfigMixin.js'
 
 export default {
   name: 'EditWebsiteInforView',
+  mixins: [urlConfigMixin],
   setup() {
     return {
       cilArrowCircleLeft,
@@ -137,27 +139,25 @@ export default {
       },
     }
   },
-  beforeCreate() {
+  async created() {
     // Using this.$route.params.idInfo to get param idInfo in url
     var idInformation = this.$route.params.idInfo
-    axios
-      .get(
-        process.env.VUE_APP_SERVER_URL +
-          'website_infomation/' +
-          idInformation +
-          '/edit',
+    try {
+      var inforWebsite = await axios.get(
+        this.serverUrl + 'website_infomation/' + idInformation + '/edit',
       )
-      .then((response) => {
-        var resultWebsiteInfor = response.data[0]
-        this.informations.id = resultWebsiteInfor.id
-        this.informations.websiteName = resultWebsiteInfor.website_name
-        this.informations.description = resultWebsiteInfor.short_desc
-        this.informations.imageUploading =
-          process.env.VUE_APP_IMAGE_URL + resultWebsiteInfor.avatar
-        this.informations.cvUploading =
-          process.env.VUE_APP_CV_URL + resultWebsiteInfor.file_url
-      })
-      .catch((error) => console.log(error))
+
+      var resultWebsiteInfor = inforWebsite.data[0]
+      this.informations.id = resultWebsiteInfor.id
+      this.informations.websiteName = resultWebsiteInfor.website_name
+      this.informations.description = resultWebsiteInfor.short_desc
+      this.informations.imageUploading =
+        this.serverUrlImage + resultWebsiteInfor.avatar
+      this.informations.cvUploading =
+        this.serverUrlPDF + resultWebsiteInfor.file_url
+    } catch (error) {
+      console.log(error)
+    }
   },
   methods: {
     uploadFile: function (event) {
@@ -205,8 +205,7 @@ export default {
           }
 
           // Send data to server using axios
-          var url =
-            process.env.VUE_APP_SERVER_URL + 'website_infomation/' + infoId
+          var url = this.serverUrl + 'website_infomation/' + infoId
           let sendData = await axios({
             method: 'post',
             url: url,

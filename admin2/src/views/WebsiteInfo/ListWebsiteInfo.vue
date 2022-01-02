@@ -52,9 +52,11 @@
 <script>
 import { cilPlus, cilPen } from '@coreui/icons'
 import axios from 'axios'
+import { urlConfigMixin } from '@/mixin/urlConfigMixin.js'
 
 export default {
   name: 'ListWebsiteInforView',
+  mixins: [urlConfigMixin],
   setup() {
     return {
       cilPlus,
@@ -64,18 +66,18 @@ export default {
   data() {
     return {
       informations: null,
-      urlFile: process.env.VUE_APP_IMAGE_URL,
+      urlFile: '',
     }
   },
-  created() {
-    axios
-      .get(process.env.VUE_APP_SERVER_URL + 'website_infomation')
-      .then((response) => {
-        this.informations = response.data
-      })
-      .catch((e) => {
-        console.log(e)
-      })
+  async created() {
+    try {
+      console.log(this.serverUrl)
+      var result = await axios.get(this.serverUrl + 'website_infomation')
+      this.informations = result.data
+      this.urlFile = this.serverUrlImage
+    } catch (error) {
+      console.log(error)
+    }
   },
   methods: {},
 }
