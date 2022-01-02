@@ -36,8 +36,10 @@ import SectionSlider from "@/components/elements/Slide/SectionSlider.vue";
 import { Glide, GlideSlide } from "vue-glide-js";
 import "vue-glide-js/dist/vue-glide.css";
 import axios from "axios";
+import { urlConfigMixin } from '@/mixins/urlConfigMixin.js';
 
 export default {
+  mixins: [urlConfigMixin],
   components: {
     [Glide.name]: Glide,
     [GlideSlide.name]: GlideSlide,
@@ -57,15 +59,13 @@ export default {
   },
 
   /*Sử dụng axios để lấy dữ liệu khi component được tạo thành công*/
-  created() {
-    axios.get(process.env.VUE_APP_SERVER_URL + 'infomation')
-    .then(response => {
+  async created() {
+    try {
+      var response = await axios.get(this.serverUrl + 'infomation')
       this.infomations = response.data
-      console.log( response.data);
-    })
-    .catch(e => {
+    } catch(e) {
       console.log(e)
-    })
+    }
   },
   /*Sử dụng axios để lấy dữ liệu khi component được tạo thành công*/
 };

@@ -14,23 +14,23 @@
 
 <script>
 import axios from 'axios'
+import { urlConfigMixin } from '@/mixins/urlConfigMixin.js'
 
 export default {
+  mixins: [urlConfigMixin],
   data() {
     return{
       myCV: null,
     }
   },
-  created() {
-    axios
-      .get(process.env.VUE_APP_SERVER_URL + 'download/mycv')
-      .then((response) => {
-        console.log(response)
-        this.myCV = process.env.VUE_APP_CV_URL + response.data
-      })
-      .catch((e) => {
-        console.log(e)
-      })
+  async created() {
+    try {
+      var response = await axios.get(this.serverUrl + 'download/mycv')
+      this.myCV = this.serverUrlPDF + response.data
+    } catch (e) {
+      console.log(e)
+    }
+    
   },
 }
 </script>

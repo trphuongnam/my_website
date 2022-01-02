@@ -100,19 +100,23 @@
         v-model="informations.id"
       />
     </div>
-    <CButton color="primary" v-on:click="submitForm">
+    <CButton color="primary" v-on:click="submitForm" id="btn_submit">
       <CIcon :icon="cilSave" size="xs" /> Save
     </CButton>
   </CForm>
+  <div class="bgr_loading" v-if="elementStatus.loading == true">
+    <img src="@/assets/icons/loading.gif" />
+  </div>
 </template>
 <script>
 import { cilArrowCircleLeft, cilSave } from '@coreui/icons'
 import axios from 'axios'
 import { urlConfigMixin } from '@/mixin/urlConfigMixin.js'
+import { loadingMixin } from '@/mixin/loadingMixin.js'
 
 export default {
   name: 'EditWebsiteInforView',
-  mixins: [urlConfigMixin],
+  mixins: [urlConfigMixin, loadingMixin],
   setup() {
     return {
       cilArrowCircleLeft,
@@ -136,6 +140,9 @@ export default {
         error_image: '',
         error_general: '',
         error_cv: '',
+      },
+      elementStatus: {
+        loading: false,
       },
     }
   },
@@ -177,6 +184,7 @@ export default {
     },
     submitForm: async function (e) {
       e.preventDefault()
+      this.addLoader()
       try {
         var infoId = this.informations.id
         var websiteName = this.informations.websiteName
@@ -191,7 +199,6 @@ export default {
           // Defined object FormData to upload image in server
           var objFormData = new FormData()
 
-          console.log(websiteName)
           // Add the form data need to submit
           objFormData.append('websiteName', websiteName)
           objFormData.append('description', description)
@@ -258,6 +265,11 @@ export default {
       } else {
         this.informations.websiteCV = fileUpload
       }
+    },
+    addLoader: function () {
+      var btnSubmitElement = document.getElementById('btn_submit')
+      btnSubmitElement.remove()
+      this.elementStatus.loading = true
     },
   },
 }

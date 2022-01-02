@@ -12,8 +12,10 @@
 
 <script>
 import axios from "axios";
+import { urlConfigMixin } from '@/mixins/urlConfigMixin.js'
 
 export default {
+  mixins: [urlConfigMixin],
   data() {
     return {
       image: null,
@@ -24,9 +26,9 @@ export default {
 
   // Hàm created() Khi trang load xong thì gọi tới server để lấy dữ liệu về
   created(){
-    axios.get(process.env.VUE_APP_SERVER_URL + "website_infomation")
+    axios.get(this.serverUrl + "website_infomation")
     .then(response => {
-      this.image = process.env.VUE_APP_IMAGE_URL + response.data[0].avatar
+      this.image = this.serverUrlImage + response.data[0].avatar
       this.website_name = response.data[0].website_name
       this.short_desc = response.data[0].short_desc
     })
