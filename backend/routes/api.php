@@ -26,7 +26,7 @@ Route::resource('website_infomation', WebsiteInfoController::class)->only(['inde
 Route::get('download/mycv', [WebsiteInfoController::class, 'downloadMyCV'])->name("download.mycv");
 
 // Route get infomation
-Route::resource('infomation', InfoController::class)->only("index");
+Route::resource('infomation', InfoController::class)->only(['index', 'store', 'edit', 'update']);
 
 // Route for contact page
 Route::resource('contact', ContactController::class)->only("store");

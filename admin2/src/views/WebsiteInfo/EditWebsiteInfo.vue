@@ -112,11 +112,10 @@
 import { cilArrowCircleLeft, cilSave } from '@coreui/icons'
 import axios from 'axios'
 import { urlConfigMixin } from '@/mixin/urlConfigMixin.js'
-import { loadingMixin } from '@/mixin/loadingMixin.js'
 
 export default {
   name: 'EditWebsiteInforView',
-  mixins: [urlConfigMixin, loadingMixin],
+  mixins: [urlConfigMixin],
   setup() {
     return {
       cilArrowCircleLeft,
